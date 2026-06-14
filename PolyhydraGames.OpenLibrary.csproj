@@ -7,7 +7,10 @@
     <LangVersion>default</LangVersion>
   </PropertyGroup>
 
- 
+  <ItemGroup>
+    <Compile Remove="PolyhydraGames.OpenLibrary.Data.Dapper/**/*.cs" />
+    <Compile Remove="PolyhydraGames.OpenLibrary.Test/**/*.cs" />
+  </ItemGroup>
 
   <ItemGroup> 
     <PackageReference Include="PolyhydraGames.Extensions" Version="2.1.1.78" />

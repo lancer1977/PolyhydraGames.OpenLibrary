@@ -1,20 +1,24 @@
-using System.Diagnostics;
 using NUnit;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using PolyhydraGames.Core.Global.Helpers;
+using PolyhydraGames.OpenLibrary;
 
 namespace PolyhydraGames.OpenLibrary.Test
 {
     public class Tests
     {
         [Test]
-        public async Task GetData()
+        public void Endpoint_Surfaces_OpenLibraryRoots()
         {
-            //var file = PolyhydraGames
-            var result = await WebHelpers.GetString("https://rpggeek.com/rpgitemversion/1000/");
-            result = result.Replace("\t", "").Replace("\n", "");
-            Assert.IsTrue(result.Contains("2002"));
+            Assert.That(Endpoint.Prefix(), Is.EqualTo("https://openlibrary.org/"));
+            Assert.That(Endpoint.Books(), Is.EqualTo("https://openlibrary.org/books/"));
+            Assert.That(Endpoint.Isbn(), Is.EqualTo("https://openlibrary.org/isbn/"));
+        }
+
+        [Test]
+        public void EncodingType_MapsToExpectedSuffix()
+        {
+            Assert.That(EncodingType.Json.Encode(), Is.EqualTo(".json"));
+            Assert.That(EncodingType.Xml.Encode(), Is.EqualTo(".xml"));
         }
     }
 }

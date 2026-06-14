@@ -19,9 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="test.txt" />
+    <ProjectReference Include="..\PolyhydraGames.OpenLibrary.csproj" />
   </ItemGroup>
 
- 
-
+  <ItemGroup>
+    <Resource Include="test.txt" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,31 @@
+name: publish-packages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      publish_nugetorg:
+        description: "Also publish to nuget.org"
+        required: false
+        default: "false"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Publish packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_NUGETORG: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_nugetorg || 'false' }}
+        run: ./pub.sh
